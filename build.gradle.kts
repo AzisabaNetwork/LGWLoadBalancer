@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.shadow)
 }
 
-group = "net.azisaba"
+group = "net.azisaba.lgwloadbalancer"
 version = System.getenv("VERSION") ?: "0.1.0-beta"
 
 repositories {
