@@ -18,15 +18,12 @@ class BungeeMessageListener(
         }
 
         val dataInput = ByteStreams.newDataInput((message ?: error("message was null!")))
-//        plugin.logger.info("Message received!")
         when (dataInput.readUTF()) {
             "PlayerCount" -> {
                 val serverName = dataInput.readUTF()
                 val playerCount = dataInput.readInt()
                 plugin.playerCountMap[serverName] = playerCount
-                plugin.logger.info("PlayerCount on $serverName -> $playerCount")
             }
         }
-//        plugin.server.broadcast(Component.text("Message Received! ${dataInput.readLine()}"))
     }
 }
