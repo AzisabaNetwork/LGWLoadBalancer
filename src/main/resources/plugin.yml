@@ -7,3 +7,8 @@ description: player load balancer
 commands:
   lgwlb:
     permission: lgwloadbalancer.cmd.lgwlb
+permissions:
+  lgwloadbalancer.cmd.lgwlb.go:
+    default: true
+  lgwloadbalancer.cmd.lgwlb.stat:
+    default: op
