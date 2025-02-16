@@ -49,9 +49,13 @@ tasks.processResources {
 
 // === For ACF-Paper===
 tasks.compileJava {
+    // on both
     options.compilerArgs.add("-parameters")
-    options.isFork = true
-    options.forkOptions.executable = System.getProperty("java.home") + "/bin/javac"
+}
+
+tasks.compileKotlin {
+    // on kotlin
+    compilerOptions.javaParameters = true
 }
 
 tasks.shadowJar {
