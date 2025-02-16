@@ -1,0 +1,9 @@
+name: LGWLoadBalancer
+version: '0.1.0-beta'
+main: net.azisaba.lgwloadbalancer.LGWLoadBalancer
+api-version: '1.16'
+authors: [ sysnote8 ]
+description: player load balancer
+commands:
+  pkreq:
+    permission: lgwloadbalancer.cmd.pkreq
