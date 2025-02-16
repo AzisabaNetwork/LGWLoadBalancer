@@ -46,3 +46,16 @@ tasks.processResources {
         expand(props)
     }
 }
+
+// === For ACF-Paper===
+tasks.compileJava {
+    options.compilerArgs.add("-parameters")
+    options.isFork = true
+    options.forkOptions.executable = System.getProperty("java.home") + "/bin/javac"
+}
+
+tasks.shadowJar {
+    relocate("co.aikar.commands", "net.azisaba.rcgacha.shadow.acf")
+    relocate("co.aikar.locales", "net.azisaba.rcgacha.shadow.locales")
+}
+// ====================
