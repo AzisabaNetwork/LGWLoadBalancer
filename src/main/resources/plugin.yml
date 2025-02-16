@@ -5,5 +5,5 @@ api-version: '1.16'
 authors: [ sysnote8 ]
 description: player load balancer
 commands:
-  pkreq:
-    permission: lgwloadbalancer.cmd.pkreq
+  lgwlb:
+    permission: lgwloadbalancer.cmd.lgwlb
