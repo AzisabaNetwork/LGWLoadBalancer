@@ -1,5 +1,5 @@
 name: LGWLoadBalancer
-version: '0.1.0-beta'
+version: '${version}'
 main: net.azisaba.lgwloadbalancer.LGWLoadBalancer
 api-version: '1.16'
 authors: [ sysnote8 ]
