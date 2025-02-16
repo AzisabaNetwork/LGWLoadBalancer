@@ -1,6 +1,7 @@
 plugins {
-    kotlin("jvm") version "2.1.10"
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.shadow)
 }
 
 group = "net.azisaba"
@@ -20,9 +21,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
-    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compileOnly(libs.paper.api)
+    implementation(libs.kotlin.stdlib.jdk8)
+
+    implementation(libs.acf.paper)
+
+    implementation(libs.kaml)
 }
 
 val targetJavaVersion = 8
