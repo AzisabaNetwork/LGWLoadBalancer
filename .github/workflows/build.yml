@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build with Java 21
+    name: Build with Java 8
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: adopt
-          java-version: 21
+          java-version: 8
           cache: gradle
 
       - name: Validate gradle wrapper
