@@ -59,7 +59,7 @@ tasks.compileKotlin {
 }
 
 tasks.shadowJar {
-    relocate("co.aikar.commands", "net.azisaba.rcgacha.shadow.acf")
-    relocate("co.aikar.locales", "net.azisaba.rcgacha.shadow.locales")
+    relocate("co.aikar.commands", "net.azisaba.rcitemdrop.shadow.acf")
+    relocate("co.aikar.locales", "net.azisaba.rcitemdrop.shadow.locales")
 }
 // ====================
