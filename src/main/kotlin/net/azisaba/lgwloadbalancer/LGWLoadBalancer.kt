@@ -11,10 +11,13 @@ import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
 class LGWLoadBalancer : JavaPlugin() {
+    var debugMode = false
     val playerCountMap = ConcurrentHashMap<String, Int>()
 
     lateinit var config: LGWLBConfig
     lateinit var commandManager: PaperCommandManager
+    lateinit var checkTask: PlayerCountCheckTask
+    private var initialized = false
 
     override fun onEnable() {
         dataFolder.mkdirs()
@@ -37,13 +40,20 @@ class LGWLoadBalancer : JavaPlugin() {
 
         commandManager.registerCommand(LGWLBCommand(this))
 
-        PlayerCountCheckTask(this).runTaskTimerAsynchronously(this, 10, 20 * 5)
+        checkTask = PlayerCountCheckTask(this)
+        checkTask.runTaskTimerAsynchronously(this, 10, 20 * 5)
+        initialized = true
     }
 
     override fun onDisable() {
         // Plugin shutdown logic
-        server.messenger.unregisterOutgoingPluginChannel(this)
-        server.messenger.unregisterIncomingPluginChannel(this)
+        if (initialized) {
+            server.messenger.unregisterOutgoingPluginChannel(this)
+            server.messenger.unregisterIncomingPluginChannel(this)
+            commandManager.unregisterCommands()
+            checkTask.cancel()
+        }
+        initialized = false
     }
 
     override fun saveDefaultConfig() {

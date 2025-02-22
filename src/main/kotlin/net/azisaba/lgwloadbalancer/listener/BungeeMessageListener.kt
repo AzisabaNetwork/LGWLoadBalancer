@@ -16,13 +16,24 @@ class BungeeMessageListener(
         if (channel != LGWLoadBalancer.BUNGEE_CORD) {
             return
         }
+        if (message == null) {
+            error("message was null!")
+        }
 
-        val dataInput = ByteStreams.newDataInput((message ?: error("message was null!")))
-        when (dataInput.readUTF()) {
+        if (plugin.debugMode) {
+            plugin.logger.info("Request raw string: ${String(message)}")
+        }
+        val dataInput = ByteStreams.newDataInput(message)
+        val dataType = dataInput.readUTF()
+//        plugin.logger.info("We got event! dataType: $dataType")
+        when (dataType) {
             "PlayerCount" -> {
                 val serverName = dataInput.readUTF()
                 val playerCount = dataInput.readInt()
                 plugin.playerCountMap[serverName] = playerCount
+                if (plugin.debugMode) {
+                    plugin.logger.info("Updated count! server: $serverName, count: $playerCount")
+                }
             }
         }
     }

@@ -10,5 +10,5 @@ commands:
 permissions:
   lgwloadbalancer.cmd.lgwlb.go:
     default: true
-  lgwloadbalancer.cmd.lgwlb.stat:
+  lgwloadbalancer.cmd.lgwlb.*:
     default: op

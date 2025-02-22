@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "net.azisaba.lgwloadbalancer"
-version = System.getenv("VERSION") ?: "0.1.0-beta"
+version = System.getenv("VERSION") ?: "0.1.0-beta.1"
 
 repositories {
     mavenCentral()
@@ -59,7 +59,7 @@ tasks.compileKotlin {
 }
 
 tasks.shadowJar {
-    relocate("co.aikar.commands", "net.azisaba.rcitemdrop.shadow.acf")
-    relocate("co.aikar.locales", "net.azisaba.rcitemdrop.shadow.locales")
+    relocate("co.aikar.commands", "net.azisaba.lgwloadbalancer.shadow.acf")
+    relocate("co.aikar.locales", "net.azisaba.lgeloadbalancer.shadow.locales")
 }
 // ====================
