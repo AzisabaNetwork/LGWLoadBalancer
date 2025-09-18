@@ -8,7 +8,7 @@ class PlayerCountCheckTask(
     private val plugin: LGWLoadBalancer,
 ) : BukkitRunnable() {
     override fun run() {
-        plugin.logger.info("Requesting player count data...")
+        if (plugin.debugMode) plugin.logger.info("Requesting player count data...")
         for (serverName in plugin.config.servers) {
             val dataOutput = ByteStreams.newDataOutput()
             dataOutput.writeUTF("PlayerCount")
@@ -18,6 +18,6 @@ class PlayerCountCheckTask(
                 plugin.logger.info("Requested to $serverName")
             }
         }
-        plugin.logger.info("Player count data requested!")
+        if (plugin.debugMode) plugin.logger.info("Player count data requested!")
     }
 }

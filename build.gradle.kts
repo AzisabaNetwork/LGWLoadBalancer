@@ -18,18 +18,21 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/") {
         name = "aikar-repo"
     }
+    maven("https://repo.codemc.org/repository/maven-public/") {
+        name = "codemc-repo"
+    }
 }
 
 dependencies {
     compileOnly(libs.paper.api)
     implementation(libs.kotlin.stdlib.jdk8)
 
-    implementation(libs.acf.paper)
+    compileOnly(libs.command.api)
 
     implementation(libs.kaml)
 }
 
-val targetJavaVersion = 8
+val targetJavaVersion = 17
 kotlin {
     jvmToolchain(targetJavaVersion)
 }

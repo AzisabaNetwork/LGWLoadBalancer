@@ -4,9 +4,7 @@ main: net.azisaba.lgwloadbalancer.LGWLoadBalancer
 api-version: '1.16'
 authors: [ sysnote8 ]
 description: player load balancer
-commands:
-  lgwlb:
-    permission: lgwloadbalancer.cmd.lgwlb
+depend: [ "CommandAPI" ]
 permissions:
   lgwloadbalancer.cmd.lgwlb.go:
     default: true

@@ -8,6 +8,7 @@ shadow = "8.1.1"
 paper-api = "1.16.5-R0.1-SNAPSHOT"
 kaml = "0.72.0"
 acf-paper = "0.5.1-SNAPSHOT"
+command-api = "9.7.0"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
@@ -19,3 +20,4 @@ paper-api = { module = "com.destroystokyo.paper:paper-api", version.ref = "paper
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kaml = { module = "com.charleskorn.kaml:kaml", version.ref = "kaml" }
 acf-paper = { module = "co.aikar:acf-paper", version.ref = "acf-paper" }
+command-api = { module = "dev.jorel:commandapi-bukkit-core", version.ref = "command-api" }
