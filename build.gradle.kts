@@ -2,10 +2,11 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.shadow)
+    alias(libs.plugins.run.paper)
 }
 
-group = "net.azisaba.lgwloadbalancer"
-version = System.getenv("VERSION") ?: "0.1.0-beta.1"
+group = "net.azisaba"
+version = System.getenv("VERSION") ?: "0.1.0"
 
 repositories {
     mavenCentral()
@@ -18,16 +19,13 @@ repositories {
     maven("https://repo.aikar.co/content/groups/aikar/") {
         name = "aikar-repo"
     }
-    maven("https://repo.codemc.org/repository/maven-public/") {
-        name = "codemc-repo"
-    }
 }
 
 dependencies {
     compileOnly(libs.paper.api)
     implementation(libs.kotlin.stdlib.jdk8)
 
-    compileOnly(libs.command.api)
+    implementation(libs.acf.paper)
 
     implementation(libs.kaml)
 }
@@ -37,32 +35,27 @@ kotlin {
     jvmToolchain(targetJavaVersion)
 }
 
-tasks.build {
-    dependsOn("shadowJar")
-}
+tasks {
+    build {
+        dependsOn("shadowJar")
+    }
 
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
-        expand(props)
+    shadowJar {
+        enableAutoRelocation = true
+        relocationPrefix = "net.azisaba.lgwloadbalancer.libs"
+    }
+
+    processResources {
+        val props = mapOf("version" to version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
+    }
+
+    runServer {
+        minecraftVersion("1.16.5")
+        ignoreUnsupportedJvm()
     }
 }
-
-// === For ACF-Paper===
-tasks.compileJava {
-    // on both
-    options.compilerArgs.add("-parameters")
-}
-
-tasks.compileKotlin {
-    // on kotlin
-    compilerOptions.javaParameters = true
-}
-
-tasks.shadowJar {
-    relocate("co.aikar.commands", "net.azisaba.lgwloadbalancer.shadow.acf")
-    relocate("co.aikar.locales", "net.azisaba.lgeloadbalancer.shadow.locales")
-}
-// ====================

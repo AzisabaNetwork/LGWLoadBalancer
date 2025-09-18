@@ -1,5 +1,6 @@
 package net.azisaba.lgwloadbalancer
 
+import co.aikar.commands.BukkitCommandManager
 import com.charleskorn.kaml.Yaml
 import net.azisaba.lgwloadbalancer.command.LGWLBCommand
 import net.azisaba.lgwloadbalancer.listener.BungeeMessageListener
@@ -14,7 +15,7 @@ class LGWLoadBalancer : JavaPlugin() {
     val playerCountMap = ConcurrentHashMap<String, Int>()
 
     lateinit var config: LGWLBConfig
-    lateinit var lgwlbCommand: LGWLBCommand
+    lateinit var commandManager: BukkitCommandManager
     lateinit var checkTask: PlayerCountCheckTask
     private var initialized = false
 
@@ -35,7 +36,8 @@ class LGWLoadBalancer : JavaPlugin() {
         server.messenger.registerOutgoingPluginChannel(this, BUNGEE_CORD)
         server.messenger.registerIncomingPluginChannel(this, BUNGEE_CORD, BungeeMessageListener(this))
 
-        lgwlbCommand = LGWLBCommand(this)
+        commandManager = BukkitCommandManager(this)
+        commandManager.registerCommand(LGWLBCommand(this), true)
 
         checkTask = PlayerCountCheckTask(this)
         checkTask.runTaskTimerAsynchronously(this, 10, 20 * 5)
@@ -45,6 +47,7 @@ class LGWLoadBalancer : JavaPlugin() {
     override fun onDisable() {
         // Plugin shutdown logic
         if (initialized) {
+            commandManager.unregisterCommands()
             server.messenger.unregisterOutgoingPluginChannel(this)
             server.messenger.unregisterIncomingPluginChannel(this)
             checkTask.cancel()
